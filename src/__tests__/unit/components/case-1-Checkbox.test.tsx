@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import userEvent from '@testing-library/user-event'
 
 import { axe } from 'jest-axe'
+
 import { render, screen, fireEvent } from '@testing-library/react'
 
 import Checkbox from '../../../components/Checkbox'
@@ -47,20 +48,58 @@ describe('The <Checkbox /> component', () => {
     //  Snapshot Testing using 'asFragment()'
     expect(asFragment()).toMatchSnapshot()
 
-    const inputElement = screen.getByRole('checkbox')
+    const inputElement = screen.getByRole('checkbox', {
+      name: /test_checkbox_label/i,
+    })
     expect(inputElement).toBeInTheDocument()
   })
 
   it('Should make the checkbox accessible by setting the id and htmlFor attributes on label and checkbox', () => {
     render(<Checkbox {...defaultCheckboxProps} />)
 
-    const labelElement = screen.getByLabelText('test_checkbox_label')
+    const labelElement = screen.getByLabelText(defaultCheckboxProps.label)
     expect(labelElement).toBeInTheDocument()
   })
 
-  it('Should call the onChange handler when it is provided', () => {})
+  it('Should call the onChange handler when it is provided', () => {
+    render(<Checkbox {...defaultCheckboxProps} />)
 
-  it('Should change state correctly when clicked (checked and unchecked)', () => {})
+    const checkbox = screen.getByRole('checkbox', {
+      name: /test_checkbox_label/i,
+    })
 
-  it('should not fail any accessibility tests', async () => {})
+    // NOTE - userEvent won't work here because
+    // fireEvent dispatches exactly the events you tell it to and just those -
+    // even if those exact events never had been dispatched in a real interaction in a browser.
+
+    // User-event on the other hand dispatches the events like they would happen if a user interacted with the document. That might lead to the same events you previously dispatched per fireEvent directly, but it also might catch bugs that make it impossible for a user to trigger said events.
+    fireEvent.click(checkbox)
+
+    expect(defaultCheckboxProps.onChange).toHaveBeenCalled()
+  })
+
+  it('Should change state correctly when clicked (checked and unchecked)', () => {
+    // updating prop
+    const updatedCheckProp = {
+      ...defaultCheckboxProps,
+      checked: true,
+    }
+
+    // console.log(updatedCheckProp)
+    render(<Checkbox {...updatedCheckProp} />)
+
+    const checkbox = screen.getByRole('checkbox', {
+      name: /test_checkbox_label/i,
+    })
+
+    expect(checkbox).toBeChecked()
+  })
+
+  it('should not fail any accessibility tests', async () => {
+    const { container } = render(<Checkbox {...defaultCheckboxProps} />)
+
+    const results = await axe(container)
+    // console.log(results)
+    expect(results).toHaveNoViolations()
+  })
 })
