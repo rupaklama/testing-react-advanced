@@ -29,7 +29,8 @@ describe('The <ProductTile /> component', () => {
 
   it('renders a product tile with name and price only when no image', () => {
     // updating the default prop
-    render(<ProductTile {...({ ...defaultProps, image: undefined } as any)} />)
+    // render(<ProductTile {...({ ...defaultProps, image: undefined } as any)} />)
+    render(<ProductTile {...(defaultProps as any)} image={undefined} />)
 
     const imageElement = screen.queryByAltText(defaultProps.name)
     // expect(imageElement).not.toBeInTheDocument()

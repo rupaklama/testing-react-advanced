@@ -38,7 +38,7 @@ describe('The <Checkbox /> component', () => {
     const { asFragment } = render(<Checkbox {...defaultCheckboxProps} />)
 
     // to see rendered dom elements
-    screen.debug()
+    // screen.debug()
 
     // NOTE - Returns a DocumentFragment of your rendered component.
     // This can be useful if you need to avoid live bindings and see how your component reacts to events.
@@ -92,6 +92,7 @@ describe('The <Checkbox /> component', () => {
       name: /test_checkbox_label/i,
     })
 
+    // CHECKBOX is checked now
     expect(checkbox).toBeChecked()
   })
 

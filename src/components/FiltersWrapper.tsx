@@ -28,9 +28,12 @@ export const FiltersWrapper: FC<PropsWithChildren<{}>> = ({ children }) => {
         showingFilters,
         debouncedSearch,
         toggleShowingFilters: () => {
-          toggleBodyScrollBehaviour()
+          setShowingFilters((showing) => {
+            // console.log('showing', showing)
+            return !showing
+          })
 
-          setShowingFilters((showing) => !showing)
+          toggleBodyScrollBehaviour()
         },
       }}
     >

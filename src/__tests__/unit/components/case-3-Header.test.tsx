@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event'
 
 describe('The Header component', () => {
   const defaultContext = {
+    // The Header component is only working with this value in the Context store
     toggleShowingFilters: jest.fn(),
   }
 

@@ -35272,6 +35272,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 var ProductStream = function ProductStream(_ref) {
   var products = _ref.products;
+  // console.log(products)
   return /*#__PURE__*/_react.default.createElement(Wrapper, null, products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductTile.default, _extends({
       key: product.id
@@ -37721,10 +37722,11 @@ var FiltersWrapper = function FiltersWrapper(_ref) {
       showingFilters: showingFilters,
       debouncedSearch: debouncedSearch,
       toggleShowingFilters: function toggleShowingFilters() {
-        toggleBodyScrollBehaviour();
         setShowingFilters(function (showing) {
+          // console.log('showing', showing)
           return !showing;
         });
+        toggleBodyScrollBehaviour();
       }
     }
   }, children);
@@ -37779,7 +37781,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56450" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55485" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

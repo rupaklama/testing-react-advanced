@@ -9,6 +9,8 @@ interface Props {
 }
 
 const ProductStream: FC<Props> = ({ products }) => {
+  // console.log(products)
+
   return (
     <Wrapper>
       {products.map((product) => (
